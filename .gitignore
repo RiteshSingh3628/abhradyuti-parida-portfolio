@@ -1,0 +1,16 @@
+node_modules
+.next
+out
+.env*.local
+npm-debug.log*
+.DS_Store
+*.tsbuildinfo
+
+# Raw source materials supplied for the build (already processed into public/images)
+/Close ups/
+/Full/
+/Mids/
+/AB WEBSITE.txt
+
+# Local tooling cache
+/.code-review-graph/

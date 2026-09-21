@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-accent: #e63946;
+  --color-cream: #f1faee;
+  --color-powder: #a8dadc;
+  --color-steel: #457b9d;
+  --color-navy: #1d3557;
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+html {
+  background-color: var(--color-cream);
+}
+
+body {
+  color: var(--color-navy);
+  background-color: var(--color-cream);
+}
+
+::selection {
+  background-color: var(--color-accent);
+  color: var(--color-cream);
+}
+
+/* Editorial section label: small tracked caps used across the site */
+.eyebrow {
+  font-size: 0.75rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.underline-hover {
+  position: relative;
+}
+
+.underline-hover::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 1px;
+  width: 100%;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.underline-hover:hover::after {
+  transform: scaleX(1);
+}
+
+/* Custom scrollbar, subtle */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-cream);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-powder);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-steel);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
