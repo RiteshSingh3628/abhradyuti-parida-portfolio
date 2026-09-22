@@ -49,7 +49,7 @@ export function Hero() {
           </motion.p>
           <motion.h1
             variants={item}
-            className="ml-auto w-fit font-serif text-[clamp(2.5rem,6.5vw,6.25rem)] leading-[0.95] text-cream"
+            className="ml-auto w-fit font-serif text-[clamp(2.5rem,6.5vw,8rem)] leading-[0.95] text-cream"
           >
             Abhradyuti
             <br />

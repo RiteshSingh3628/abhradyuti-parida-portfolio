@@ -22,7 +22,7 @@ const config: Config = {
         cinematic: "cubic-bezier(0.22, 1, 0.36, 1)",
       },
       maxWidth: {
-        content: "1440px",
+        content: "1680px",
       },
     },
   },
