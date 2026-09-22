@@ -41,7 +41,7 @@ export function Hero() {
         variants={container}
         initial="hidden"
         animate="visible"
-        className="relative z-10 mx-auto flex w-full max-w-content justify-end px-6 pb-16 md:px-10 md:pb-24"
+        className="relative z-10 flex w-full justify-end px-6 pb-16 md:px-12 md:pb-24 lg:px-16"
       >
         <div className="text-right">
           <motion.p variants={item} className="eyebrow mb-5 text-powder md:block">
