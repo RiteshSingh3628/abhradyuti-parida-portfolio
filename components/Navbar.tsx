@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { actor } from "@/data/actor";
@@ -17,6 +18,11 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState<string>("");
   const [menuOpen, setMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -112,55 +118,58 @@ export function Navbar() {
           />
         </button>
       </nav>
+      {mounted &&
+        createPortal(
+          <AnimatePresence>
+            {menuOpen && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                className="fixed inset-0 z-[45] flex h-[100dvh] flex-col justify-between bg-navy px-6 pb-10 pt-28 md:hidden"
+              >
+                <ul className="flex flex-col gap-2">
+                  {LINKS.map((link, i) => (
+                    <motion.li
+                      key={link.href}
+                      initial={{ opacity: 0, y: 16 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: 0.08 + i * 0.06, ease: [0.22, 1, 0.36, 1] }}
+                      className="border-b border-cream/10 py-4"
+                    >
+                      <a
+                        href={link.href}
+                        onClick={() => setMenuOpen(false)}
+                        className={cn(
+                          "font-serif text-4xl transition-colors duration-300",
+                          active === link.href ? "text-accent" : "text-cream"
+                        )}
+                      >
+                        {link.label}
+                      </a>
+                    </motion.li>
+                  ))}
+                </ul>
 
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed inset-0 z-40 flex flex-col justify-between bg-navy px-6 pb-10 pt-28 md:hidden"
-          >
-            <ul className="flex flex-col gap-2">
-              {LINKS.map((link, i) => (
-                <motion.li
-                  key={link.href}
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.08 + i * 0.06, ease: [0.22, 1, 0.36, 1] }}
-                  className="border-b border-cream/10 py-4"
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5, delay: 0.4 }}
+                  className="flex flex-col gap-1"
                 >
-                  <a
-                    href={link.href}
-                    onClick={() => setMenuOpen(false)}
-                    className={cn(
-                      "font-serif text-4xl transition-colors duration-300",
-                      active === link.href ? "text-accent" : "text-cream"
-                    )}
-                  >
-                    {link.label}
+                  <a href={`mailto:${actor.email}`} className="eyebrow text-cream/60">
+                    {actor.email}
                   </a>
-                </motion.li>
-              ))}
-            </ul>
-
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="flex flex-col gap-1"
-            >
-              <a href={`mailto:${actor.email}`} className="eyebrow text-cream/60">
-                {actor.email}
-              </a>
-              <a href={actor.phoneHref} className="eyebrow text-cream/60">
-                {actor.phone}
-              </a>
-            </motion.div>
-          </motion.div>
+                  <a href={actor.phoneHref} className="eyebrow text-cream/60">
+                    {actor.phone}
+                  </a>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>,
+          document.body
         )}
-      </AnimatePresence>
     </header>
   );
 }
