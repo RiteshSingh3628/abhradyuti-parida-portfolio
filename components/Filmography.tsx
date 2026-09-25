@@ -197,7 +197,8 @@ function VideoCard({ credit, index }: { credit: Credit; index: number }) {
         <div className="mt-4 flex items-start justify-between gap-4">
           <div>
             <h3 className="font-serif text-xl text-navy transition-colors duration-300 group-hover:text-accent md:text-2xl">
-              {credit.title}
+              {credit.title}{" "}
+              <span className="text-base text-navy/50 md:text-lg">({credit.type})</span>
             </h3>
             <p className="mt-1 text-sm text-navy/60">
               {credit.year} · {credit.role} · {credit.director}
