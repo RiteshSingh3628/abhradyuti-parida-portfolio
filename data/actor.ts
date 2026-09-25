@@ -1,7 +1,7 @@
 export const actor = {
   name: "Abhradyuti Parida",
   title: "Actor",
-  tagline: "Crafting character-driven stories across web series, short films and screen.",
+  tagline: "Crafting character-driven stories across films, web series and short films.",
   location: "Hyderabad, Telangana",
   nativePlace: "Sambalpur, Odisha",
   email: "abhradyutiparida99@gmail.com",
